@@ -228,18 +228,16 @@ body::after {
 }
 
 /* ---------- overlay ---------- */
-.overlay { position: fixed; inset: 0; z-index: 10; }
+/* overlay does not capture clicks: the map stays interactive underneath,
+   so clicking another node swaps straight to the next popup. */
+.overlay { position: fixed; inset: 0; z-index: 10; pointer-events: none; }
 .overlay[hidden] { display: none; }
 
 .overlay-backdrop {
   position: absolute; inset: 0;
-  background: rgba(6, 6, 8, 0.5);
-  backdrop-filter: blur(2.5px) saturate(0.85);
-  -webkit-backdrop-filter: blur(2.5px) saturate(0.85);
-  opacity: 0;
-  transition: opacity 0.4s var(--ease);
+  background: transparent;
+  pointer-events: none;
 }
-.overlay.open .overlay-backdrop { opacity: 1; }
 
 .panel {
   position: absolute;
@@ -344,6 +342,83 @@ body::after {
 .panel::-webkit-scrollbar { width: 8px; }
 .panel::-webkit-scrollbar-thumb { background: var(--muted-dim); }
 .panel::-webkit-scrollbar-track { background: transparent; }
+
+/* ---------- experimental: centred ellipse popup ---------- */
+.bubble {
+  position: absolute;
+  left: 50%; top: 50%;                 /* JS overrides with the node position */
+  /* size to content, within bounds */
+  width: max-content;
+  max-width: min(520px, 86vw);
+  min-width: 260px;
+  height: auto;
+  max-height: min(72vh, 540px);
+  min-height: 220px;
+  /* generous padding keeps the (rectangular) text inside the ellipse */
+  padding: clamp(46px, 6vw, 74px) clamp(54px, 7vw, 92px);
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, #191a20 0%, #131318 72%, #101015 100%);
+  border: 1px solid var(--line);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.6);
+  pointer-events: auto;               /* the bubble itself stays interactive */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  overflow: hidden;
+  transform: translate(-50%, -50%) scale(0.15);
+  opacity: 0;
+  transition: transform 0.5s var(--ease), opacity 0.35s var(--ease);
+}
+.overlay.open .bubble { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+
+/* grow-from-the-dot, re-played on every open and every swap */
+.bubble.pop { animation: bubble-pop 0.42s var(--ease); }
+@keyframes bubble-pop {
+  from { transform: translate(-50%, -50%) scale(0.12); opacity: 0; }
+  to   { transform: translate(-50%, -50%) scale(1);    opacity: 1; }
+}
+
+/* content scrolls inside the ellipse once it exceeds the max size.
+   min-height:0 lets this flex child shrink below its content and scroll. */
+.bubble-inner {
+  width: 100%;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.bubble-inner::-webkit-scrollbar { width: 5px; }
+.bubble-inner::-webkit-scrollbar-thumb { background: var(--muted-dim); border-radius: 3px; }
+.bubble-inner::-webkit-scrollbar-track { background: transparent; }
+
+.bubble .panel-close {
+  top: 8%; left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+}
+.bubble .panel-close:hover { transform: translateX(-50%) rotate(90deg); }
+
+.bubble .panel-meta { margin-bottom: 10px; }
+.bubble .panel-title {
+  font-size: clamp(24px, 3.2vw, 36px);
+  margin-bottom: 14px;
+}
+.bubble .panel-body {
+  font-size: clamp(13.5px, 1.05vw, 15.5px);
+  line-height: 1.46;
+}
+.bubble .panel-links {
+  border-top: 0;
+  margin-top: 16px;
+  padding-top: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+.bubble .panel-links a { justify-content: center; }
+.bubble .panel-images { display: none; }  /* skip images inside the ellipse for now */
 
 /* reduced motion */
 @media (prefers-reduced-motion: reduce) {

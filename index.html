@@ -44,14 +44,16 @@
   <!-- detail overlay -->
   <div class="overlay" id="overlay" hidden>
     <div class="overlay-backdrop" id="overlay-backdrop"></div>
-    <aside class="panel" role="dialog" aria-modal="true" aria-labelledby="panel-title">
+    <div class="bubble" role="dialog" aria-modal="true" aria-labelledby="panel-title">
       <button class="panel-close" id="panel-close" aria-label="Close">&#215;</button>
-      <p class="panel-meta" id="panel-meta"></p>
-      <h2 class="panel-title" id="panel-title"></h2>
-      <div class="panel-body" id="panel-body"></div>
-      <ul class="panel-links" id="panel-links"></ul>
-      <div class="panel-images" id="panel-images"></div>
-    </aside>
+      <div class="bubble-inner">
+        <p class="panel-meta" id="panel-meta"></p>
+        <h2 class="panel-title" id="panel-title"></h2>
+        <div class="panel-body" id="panel-body"></div>
+        <ul class="panel-links" id="panel-links"></ul>
+        <div class="panel-images" id="panel-images"></div>
+      </div>
+    </div>
   </div>
 
   <script src="app.js"></script>

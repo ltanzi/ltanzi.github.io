@@ -213,7 +213,7 @@ PROJECTS.forEach((p, i) => {
   btn.addEventListener("focus", () => showGuides(readouts));
   btn.addEventListener("mouseleave", hideGuides);
   btn.addEventListener("blur", hideGuides);
-  btn.addEventListener("click", () => openPanel(p));
+  btn.addEventListener("click", () => openPanel(p, x, y));
 
   nodesEl.appendChild(btn);
 });
@@ -256,7 +256,7 @@ function hideGuides() {
 
 /* ---------- overlay ---------- */
 const overlay = document.getElementById("overlay");
-const panelEl = document.querySelector(".panel");
+const bubbleEl = document.querySelector(".bubble");
 const backdrop = document.getElementById("overlay-backdrop");
 const closeBtn = document.getElementById("panel-close");
 const elMeta = document.getElementById("panel-meta");
@@ -265,10 +265,7 @@ const elBody = document.getElementById("panel-body");
 const elLinks = document.getElementById("panel-links");
 const elImages = document.getElementById("panel-images");
 
-function openPanel(p) {
-  // open on the opposite side of the node: right-half nodes -> panel on the left
-  panelEl.classList.toggle("left", p.x >= 0.5);
-
+function openPanel(p, xp, yp) {
   elMeta.textContent = p.years + " · " + p.category + " · seriousness " + p.s + "/10";
   elTitle.textContent = p.label;
   elBody.innerHTML = "<p>" + p.description + "</p>";
@@ -294,8 +291,22 @@ function openPanel(p) {
     elImages.appendChild(img);
   });
 
+  // reveal first so the bubble has a measurable size, then centre it on the
+  // node's coordinate, clamped so the ellipse stays fully inside the viewport.
   overlay.hidden = false;
-  requestAnimationFrame(() => overlay.classList.add("open"));
+  const vw = window.innerWidth, vh = window.innerHeight;
+  const bw = bubbleEl.offsetWidth, bh = bubbleEl.offsetHeight;
+  const m = 12;
+  const cx = Math.max(bw / 2 + m, Math.min(vw - bw / 2 - m, (xp / 100) * vw));
+  const cy = Math.max(bh / 2 + m, Math.min(vh - bh / 2 - m, (yp / 100) * vh));
+  bubbleEl.style.left = cx + "px";
+  bubbleEl.style.top = cy + "px";
+
+  overlay.classList.add("open");
+  // (re)play the grow-from-the-dot animation on every open / swap
+  bubbleEl.classList.remove("pop");
+  void bubbleEl.offsetWidth;   // force reflow so the animation restarts
+  bubbleEl.classList.add("pop");
   closeBtn.focus();
 }
 
@@ -304,8 +315,15 @@ function closePanel() {
   setTimeout(() => { overlay.hidden = true; }, 500);
 }
 
-backdrop.addEventListener("click", closePanel);
 closeBtn.addEventListener("click", closePanel);
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && !overlay.hidden) closePanel();
+});
+
+// click on empty map (not a node, not the bubble) closes the popup;
+// clicking another node is left to that node's handler, which swaps.
+document.addEventListener("click", (e) => {
+  if (overlay.hidden) return;
+  if (e.target.closest(".node") || e.target.closest(".bubble")) return;
+  closePanel();
 });
