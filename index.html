@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leonardo Tanzi</title>
+  <meta name="description" content="A life, plotted against time and seriousness." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- corner identity -->
+  <header class="chrome">
+    <span class="name">Leonardo Tanzi</span>
+    <a class="mail" href="mailto:leo.tanzi@gmail.com">leo.tanzi@gmail.com</a>
+  </header>
+
+  <!-- the plot -->
+  <main class="stage" id="stage">
+    <!-- axes -->
+    <div class="axis axis-x" aria-hidden="true"></div>
+    <div class="axis axis-y" aria-hidden="true"></div>
+    <span class="axis-label axis-label-y" aria-hidden="true">seriousness &#8593;</span>
+    <span class="axis-label axis-label-x" aria-hidden="true">time &#8594;</span>
+
+    <!-- hover guide lines -->
+    <svg class="guides" id="guides" aria-hidden="true" preserveAspectRatio="none">
+      <line id="guide-v" x1="0" y1="0" x2="0" y2="0" />
+      <line id="guide-h" x1="0" y1="0" x2="0" y2="0" />
+    </svg>
+
+    <!-- axis value read-outs -->
+    <span class="axis-val" id="val-x" aria-hidden="true"></span>
+    <span class="axis-val" id="val-y" aria-hidden="true"></span>
+
+    <!-- nodes injected here -->
+    <div class="nodes" id="nodes"></div>
+  </main>
+
+  <!-- detail overlay -->
+  <div class="overlay" id="overlay" hidden>
+    <div class="overlay-backdrop" id="overlay-backdrop"></div>
+    <aside class="panel" role="dialog" aria-modal="true" aria-labelledby="panel-title">
+      <button class="panel-close" id="panel-close" aria-label="Close">&#215;</button>
+      <p class="panel-meta" id="panel-meta"></p>
+      <h2 class="panel-title" id="panel-title"></h2>
+      <div class="panel-body" id="panel-body"></div>
+      <ul class="panel-links" id="panel-links"></ul>
+      <div class="panel-images" id="panel-images"></div>
+    </aside>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
