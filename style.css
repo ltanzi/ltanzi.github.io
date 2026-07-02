@@ -285,6 +285,16 @@ body::after {
   color: var(--accent);
   margin-bottom: 14px;
 }
+.panel-location {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin-top: -6px;
+  margin-bottom: 16px;
+}
+.panel-location::before { content: "\2197  "; }  /* ↗ marker */
+
 .panel-title {
   font-family: var(--font-display);
   font-weight: 700;
@@ -419,6 +429,14 @@ body::after {
 }
 .bubble .panel-links a { justify-content: center; }
 .bubble .panel-images { display: none; }  /* skip images inside the ellipse for now */
+
+/* inside the bubble everything is white — no accent coloring */
+.bubble .panel-meta,
+.bubble .panel-location,
+.bubble .panel-body,
+.bubble .panel-links a,
+.bubble .panel-links a::before,
+.bubble .panel-links a:hover { color: var(--cream); }
 
 /* reduced motion */
 @media (prefers-reduced-motion: reduce) {

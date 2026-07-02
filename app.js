@@ -9,31 +9,36 @@
 const PROJECTS = [
   {
     key: "hotcollective",
+    location: "Parma, Italy",
     label: "hotcollective",
     years: "2013–2020",
-    category: "Event / Collective",
+    category: "Collective",
     s: 1,                 // set by Leo
     x: 0.14,
-    description: "<em>TODO — describe hotcollective.</em> A party collective organized with friends.",
-    links: [],
+    description: "Something that started as a joke and ended as a 10-years project. Curating with two friends a monthly event, bringing national and international artists from the hip-hop/rap world in Parma.",
+    links: [
+      { label: "@hotcollective", url: "https://www.instagram.com/hotcollective/" },
+    ],
     image: null,
   },
   {
     key: "bsc",
+    location: "Parma, Italy",
     label: "BSc",
     years: "2012–2016",
-    category: "Academic · Parma",
+    category: "Academic",
     s: 6,                 // placeholder
     x: 0.07,
-    description: "B.Sc. in Computer Science at the University of Parma — Telecommunication &amp; Electronic Engineering curriculum. Where it all started.",
+    description: "B.Sc. in Computer Science at the University of Parma — Telecommunication &amp; Electronic Engineering curriculum. Thesis in Computer Vision on Harris corner detector.",
     links: [],
-    image: null,
+    image: "images/bsc/bsc1.jpeg",
   },
   {
     key: "msc",
+    location: "Turin, Italy",
     label: "MSc",
     years: "2017–2019",
-    category: "Academic · Turin",
+    category: "Academic",
     s: 7,                 // placeholder
     x: 0.24,
     description: "M.Sc. in Computer Engineering at the Polytechnic University of Turin — Graphic &amp; Multimedia curriculum.",
@@ -42,20 +47,22 @@ const PROJECTS = [
   },
   {
     key: "master thesis",
+    location: "Stockholm, Sweden",
     label: "kth thesis",
     years: "2019",
-    category: "Research · KTH",
+    category: "Research",
     s: 8,                 // placeholder
     x: 0.31,
-    description: "Visiting researcher at KTH Royal Institute of Technology, working on deep learning for bone-fracture classification.",
+    description: "Visiting researcher at KTH Royal Institute of Technology, master thesis on deep learning for bone-fracture classification.",
     links: [],
     image: null,
   },
   {
     key: "phd",
+    location: "Turin, Italy",
     label: "PhD",
     years: "2019–2022",
-    category: "Academic · Turin",
+    category: "Academic",
     s: 9,                 // placeholder
     x: 0.38,
     description: "Ph.D. at the Polytechnic University of Turin on deep learning for human-machine interaction in healthcare. 20 publications, 722 citations, h-index 9.",
@@ -66,9 +73,10 @@ const PROJECTS = [
   },
   {
     key: "teaching",
+    location: "Turin, Italy",
     label: "Teaching",
     years: "2020–2022",
-    category: "Teaching · Turin",
+    category: "Teaching",
     s: 4,                 // placeholder
     x: 0.45,
     description: "Teaching assistant at the Polytechnic University of Turin across three courses: 3D Graphics in Biometrics, Modelling Design, and Engineering Drawing.",
@@ -77,17 +85,21 @@ const PROJECTS = [
   },
   {
     key: "sgambetto",
+    location: "Turin, Italy",
     label: "sgambetto",
     years: "2021–2023",
-    category: "Chess / Community",
+    category: "Chess",
     s: 2,                 // set by Leo
     x: 0.59,
-    description: "<em>TODO — describe sgambetto.</em> A chess tournament I organized.",
-    links: [],
+    description: "Itinerant amateur chess tournaments in Turin. Big prizes, big laughs. 10 events in 2 years.",
+    links: [
+      { label: "@sssgambetto", url: "https://www.instagram.com/sssgambetto/" },
+    ],
     image: null,
   },
   {
     key: "writing",
+    location: "Remote",
     label: "ai writing",
     years: "2020–2023",
     category: "Writing",
@@ -102,61 +114,73 @@ const PROJECTS = [
   },
   {
     key: "paris",
+    location: "Paris, France",
     label: "cnrs internship",
     years: "2022",
-    category: "Research · CNRS",
+    category: "Research",
     s: 8,                 // placeholder
     x: 0.66,
     description: "Visiting researcher at Heudiasyc, CNRS / UTC Sorbonne Université — hierarchical neural architectures for medical-imaging classification.",
-    links: [],
+    links: [
+      { label: "arXiv paper", url: "https://arxiv.org/pdf/2411.16438" },
+    ],
     image: null,
   },
   {
     key: "xarxa",
+    location: "Barcelona, Spain",
     label: "xarxa",
-    years: "2026-present",
-    category: "Web · Mutual Aid",
+    years: "2026–present",
+    category: "Mutual Aid",
     s: 8,                 // placeholder
     x: 0.88,
-    description: "A volunteer service-exchange platform — a community bulletin board where people and collectives offer or request services for free. Real-time chat, multilingual (CA/ES/EN), OAuth.",
+    description: "A volunteer service-exchange platform — a community bulletin board where people and collectives offer or request services for free. Real-time chat, multilingual (CA/ES/EN), OAuth. Currently deployed but still not active.",
     links: [
-      { label: "github.com/ltanzi/xarxa", url: "https://github.com/ltanzi/xarxa" },
+      { label: "xarxa.help", url: "https://www.xarxa.help" },
     ],
     image: null,
   },
   {
     key: "methinks",
+    location: "Barcelona, Spain",
     label: "methinks.ai",
     years: "2023–present",
-    category: "Work · Barcelona",
+    category: "Work",
     s: 9,                 // set by Leo
     x: 0.73,
     description: "Deep Learning Engineer, then Senior, at Methinks AI in Barcelona. Building computer-vision systems for stroke diagnosis — data strategy, model design, clinical validation, deployment, and FDA submissions.",
-    links: [],
+    links: [
+      { label: "methinks.ai", url: "https://www.methinks.ai/" },
+    ],
     image: null,
   },
   {
     key: "canino",
+    location: "Barcelona, Spain",
     label: "canino.fm",
     years: "2024–present",
-    category: "Radio · Community",
+    category: "Radio",
     s: 6,                 // placeholder
     x: 0.80,
-    description: "Independent community radio in Barcelona, founded in 2024 to amplify local artists and cultural collectives. Weekly Sunday broadcasts from the cultural space F O C.",
+    description: "Independent community radio in Barcelona, founded in 2024 to amplify local artists and cultural collectives. Weekly Sunday broadcasts from the cultural space F O C. We are two people co-running the radio, sharing the creative direction, organization, volunteers management, finance, struggle, and happiness. Sometimes recording a show as dj gaviscon.",
     links: [
       { label: "canino.fm", url: "https://www.canino.fm" },
+      { label: "dj gaviscon", url: "https://www.youtube.com/watch?v=3qVzlGpXZWY&list=PL--tayYSfv3esIHvSeyTlvUGRdmhs10zi&index=7" },
     ],
     image: null,
   },
   {
     key: "pose-suggester",
+    location: "Barcelona, Spain",
     label: "pose suggester",
     years: "2026",
-    category: "Personal · Toy",
+    category: "Toy",
     s: 2,                 // set by Leo
     x: 0.96,
-    description: "A tiny web toy that suggests drawing poses. Built quickly, in the spirit of not taking things too seriously.",
-    links: [],
+    description: "At canino.fm, we take a photo of every guest against a standard background before their show. This pose suggester helps them decide how to pose.",
+    links: [
+      { label: "try it", url: "https://ltanzi.github.io/canino-pose-suggester/" },
+    ],
     image: null,
   },
 ];
@@ -260,13 +284,15 @@ const bubbleEl = document.querySelector(".bubble");
 const backdrop = document.getElementById("overlay-backdrop");
 const closeBtn = document.getElementById("panel-close");
 const elMeta = document.getElementById("panel-meta");
+const elLocation = document.getElementById("panel-location");
 const elTitle = document.getElementById("panel-title");
 const elBody = document.getElementById("panel-body");
 const elLinks = document.getElementById("panel-links");
 const elImages = document.getElementById("panel-images");
 
 function openPanel(p, xp, yp) {
-  elMeta.textContent = p.years + " · " + p.category + " · seriousness " + p.s + "/10";
+  elMeta.textContent = p.location ? p.years + " · " + p.location : p.years;
+  elLocation.style.display = "none";
   elTitle.textContent = p.label;
   elBody.innerHTML = "<p>" + p.description + "</p>";
 
