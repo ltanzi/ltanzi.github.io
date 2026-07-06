@@ -505,8 +505,9 @@ body::after {
 }
 
 @media (max-width: 768px) {
-  /* let the page scroll (so the bottom note has room below the content) */
-  body { overflow-x: hidden; overflow-y: auto; }
+  /* let the whole document scroll naturally — reliable on real phones,
+     unlike a body overflow:auto container with height:100% */
+  html, body { height: auto; overflow: visible; }
 
   /* cleaner map: no thumbnails, smaller labels */
   .node-thumb { display: none !important; }
