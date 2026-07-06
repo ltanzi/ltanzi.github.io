@@ -200,7 +200,8 @@ const PROJECTS = [
 /* ---------- coordinate mapping ---------- */
 // seriousness domain and where the horizontal axis sits (the centre value)
 const S_MIN = 1, S_MAX = 10, S_MID = (S_MIN + S_MAX) / 2;
-const HALF_X = 42;  // % half-extent horizontally (centre 50 ± 42 -> 8..92)
+// narrower horizontal spread on mobile so edge labels aren't clipped
+const HALF_X = window.matchMedia("(max-width: 768px)").matches ? 27 : 42;
 const HALF_Y = 38;  // % half-extent vertically   (centre 50 ± 38 -> 12..88)
 
 function xPct(p) {
@@ -231,6 +232,11 @@ const guideV = document.getElementById("guide-v");
 const guideH = document.getElementById("guide-h");
 const valX = document.getElementById("val-x");
 const valY = document.getElementById("val-y");
+
+// hover doesn't exist on touch, so the guide/read-out reveal is desktop-only;
+// on mobile a single tap opens the popup directly.
+const MOBILE_Q = window.matchMedia("(max-width: 768px)");
+function isMobile() { return MOBILE_Q.matches; }
 
 PROJECTS.forEach((p, i) => {
   const x = xPct(p), y = yPct(p);
@@ -266,10 +272,10 @@ PROJECTS.forEach((p, i) => {
   }
 
   const readouts = { x, y, year: xYear(p), s: p.s };
-  btn.addEventListener("mouseenter", () => showGuides(readouts));
-  btn.addEventListener("focus", () => showGuides(readouts));
-  btn.addEventListener("mouseleave", hideGuides);
-  btn.addEventListener("blur", hideGuides);
+  btn.addEventListener("mouseenter", () => { if (!isMobile()) showGuides(readouts); });
+  btn.addEventListener("focus", () => { if (!isMobile()) showGuides(readouts); });
+  btn.addEventListener("mouseleave", () => { if (!isMobile()) hideGuides(); });
+  btn.addEventListener("blur", () => { if (!isMobile()) hideGuides(); });
   btn.addEventListener("click", () => openPanel(p, x, y));
 
   nodesEl.appendChild(btn);
@@ -336,6 +342,7 @@ function positionBubble(xp, yp) {
 }
 
 function openPanel(p, xp, yp) {
+  hideGuides();
   elMeta.textContent = p.location ? p.years + " · " + p.location : p.years;
   elLocation.style.display = "none";
   elTitle.textContent = p.label;
@@ -393,7 +400,32 @@ document.addEventListener("keydown", (e) => {
 // click on empty map (not a node, not the bubble) closes the popup;
 // clicking another node is left to that node's handler, which swaps.
 document.addEventListener("click", (e) => {
-  if (overlay.hidden) return;
-  if (e.target.closest(".node") || e.target.closest(".bubble")) return;
-  closePanel();
+  if (
+    e.target.closest(".node") ||
+    e.target.closest(".bubble") ||
+    e.target.closest(".view-toggle") ||
+    e.target.closest(".list-item")
+  ) return;
+  if (!overlay.hidden) closePanel();
+});
+
+/* ---------- mobile: chronological list + map/list toggle ---------- */
+const listEl = document.getElementById("list");
+PROJECTS.slice()
+  .sort((a, b) => a.x - b.x)
+  .forEach((p) => {
+    const item = document.createElement("button");
+    item.className = "list-item";
+    item.innerHTML =
+      '<span class="l-label">' + p.label + "</span>" +
+      '<span class="l-meta">' + p.years + (p.location ? " · " + p.location : "") + "</span>";
+    item.addEventListener("click", () => openPanel(p, 50, 50)); // centre the popup
+    listEl.appendChild(item);
+  });
+
+const viewToggle = document.getElementById("view-toggle");
+viewToggle.addEventListener("click", () => {
+  const listView = document.body.classList.toggle("list-view");
+  viewToggle.textContent = listView ? "map" : "list";
+  if (!overlay.hidden) closePanel();
 });

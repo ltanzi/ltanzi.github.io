@@ -41,6 +41,15 @@
     <div class="nodes" id="nodes"></div>
   </main>
 
+  <!-- mobile: chronological list (populated by app.js) -->
+  <div class="list" id="list" aria-hidden="true"></div>
+
+  <!-- mobile: switch between map and list -->
+  <button class="view-toggle" id="view-toggle" aria-label="Switch view">list</button>
+
+  <!-- mobile: note that the site is built for desktop -->
+  <p class="desktop-note">best experienced on desktop</p>
+
   <!-- detail overlay -->
   <div class="overlay" id="overlay" hidden>
     <div class="overlay-backdrop" id="overlay-backdrop"></div>
