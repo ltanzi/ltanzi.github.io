@@ -80,7 +80,7 @@ const PROJECTS = [
     links: [
       { label: "Google Scholar", url: "https://scholar.google.com/citations?user=s0p13UEAAAAJ" },
     ],
-    image: "images/phd/phd1.png",
+    image: "images/phd/phd1.jpg",
   },
   {
     key: "teaching",
@@ -143,7 +143,7 @@ const PROJECTS = [
     links: [
       { label: "arXiv paper", url: "https://arxiv.org/pdf/2411.16438" },
     ],
-    image: "images/paris/paris1.png",
+    image: "images/paris/paris1.jpg",
   },
   {
     key: "xarxa",
