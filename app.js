@@ -62,7 +62,9 @@ const PROJECTS = [
     s: 8,                 // placeholder
     x: 0.33,
     description: "Visiting researcher at KTH Royal Institute of Technology, master thesis on deep learning for bone-fracture classification.",
-    links: [],
+    links: [
+      {label: "arxiv paper", url: "https://arxiv.org/pdf/2108.03414"},
+    ],
     image: "images/master-thesis/master-thesis1.jpeg",
   },
   {
@@ -102,7 +104,7 @@ const PROJECTS = [
     category: "Chess",
     s: 2,                 // set by Leo
     x: 0.65,
-    description: "Itinerant amateur chess tournaments in Turin. Big prizes, big laughs. 10 events in 10 different places (from bars to print shops) over a period of 2 years.",
+    description: "Itinerant amateur chess tournaments. Big prizes, big laughs. 10 events in 10 different places (from bars to print shops) over a period of 2 years.",
     links: [
       { label: "@sssgambetto", url: "https://www.instagram.com/sssgambetto/" },
     ],
@@ -156,7 +158,7 @@ const PROJECTS = [
     links: [
       { label: "xarxa.help", url: "https://www.xarxa.help" },
     ],
-    image: "images/xarxa/xarxa1.png",
+    image: "images/xarxa/xarxa1.jpg",
   },
   {
     key: "methinks",
@@ -167,7 +169,7 @@ const PROJECTS = [
     category: "Work",
     s: 10,                 // set by Leo
     x: 0.73,
-    description: "Deep Learning Engineer, then Senior, at Methinks AI in Barcelona. Building computer-vision systems for stroke diagnosis — data strategy, model design, clinical validation, deployment, and FDA submissions.",
+    description: "Deep Learning Engineer, then Senior. Building computer-vision systems for stroke diagnosis — data strategy, model design, clinical validation, deployment, and FDA submissions.",
     links: [
       { label: "methinks.ai", url: "https://www.methinks.ai/" },
     ],
