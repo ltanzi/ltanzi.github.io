@@ -472,12 +472,8 @@ body::after {
 
 .list {
   display: none;
-  position: fixed;
-  inset: 0;
   flex-direction: column;
-  padding: 96px 22px 48px;
-  overflow-y: auto;
-  z-index: 1;
+  padding: 96px 22px 40px;
 }
 .list-item {
   display: flex;
@@ -509,6 +505,9 @@ body::after {
 }
 
 @media (max-width: 768px) {
+  /* let the page scroll (so the bottom note has room below the content) */
+  body { overflow-x: hidden; overflow-y: auto; }
+
   /* cleaner map: no thumbnails, smaller labels */
   .node-thumb { display: none !important; }
   .node .label { font-size: 12px; }
@@ -539,22 +538,17 @@ body::after {
   body.list-view .stage { display: none; }
   body.list-view .list { display: flex; }
 
-  /* "best on desktop" note pinned at the bottom */
+  /* "best on desktop" note in normal flow at the bottom, with breathing room */
   .desktop-note {
     display: block;
-    position: fixed;
-    bottom: 14px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 6;
-    margin: 0;
+    margin: 52px 0 0;
+    padding: 0 0 28px;
+    text-align: center;
     font-family: var(--font-mono);
     font-size: 10.5px;
     letter-spacing: 0.1em;
     text-transform: lowercase;
     color: var(--muted);
-    white-space: nowrap;
-    pointer-events: none;
   }
 }
 
