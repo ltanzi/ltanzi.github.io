@@ -182,10 +182,10 @@ body::after {
   cursor: pointer;
   color: var(--muted);
   text-transform: lowercase;
-  transition: color 0.3s var(--ease), transform 0.3s var(--ease);
-  opacity: 1;
-  animation: node-in 0.7s var(--ease) backwards;
+  opacity: 0;
+  transition: opacity 0.6s var(--ease), color 0.3s var(--ease), transform 0.3s var(--ease);
 }
+.node.ready { opacity: 1; }
 
 .node .dot {
   position: absolute;
@@ -197,10 +197,19 @@ body::after {
   box-shadow: 0 0 0 0 var(--accent-dim);
   transition: background 0.3s var(--ease), box-shadow 0.4s var(--ease);
 }
-.node .label {
+/* label + optional thumbnail, stacked, sitting on the outward side of the dot */
+/* content block shrink-wraps the label, so the dot + label keep their exact
+   original position; the thumbnail is absolutely placed, centred under the label. */
+.node-content {
   position: absolute;
   top: 0;
   transform: translateY(-50%);
+}
+.node.text-left  .node-content { right: 13px; text-align: right; }
+.node.text-right .node-content { left: 13px;  text-align: left; }
+
+.node .label {
+  display: block;
   white-space: nowrap;
   font-family: var(--font-display);
   font-weight: 600;
@@ -208,9 +217,20 @@ body::after {
   letter-spacing: -0.005em;
   transition: color 0.3s var(--ease);
 }
-/* label sits on the outward side; the dot faces the centre */
-.node.text-left  .label { right: 13px; }
-.node.text-right .label { left: 13px; }
+.node-thumb {
+  position: absolute;
+  top: calc(100% + 9px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  height: auto;
+  max-width: 104px;
+  max-height: 104px;
+  opacity: 0;
+  transition: opacity 0.3s var(--ease);
+}
+.node:hover .node-thumb,
+.node:focus-visible .node-thumb { opacity: 1; }
 
 .node:hover,
 .node:focus-visible { color: var(--cream); outline: none; transform: scale(1.06); }
@@ -220,12 +240,7 @@ body::after {
   box-shadow: 0 0 0 5px var(--accent-dim);
 }
 .node:hover .label,
-.node:focus-visible .label { color: var(--cream); }
-
-@keyframes node-in {
-  from { opacity: 0; transform: scale(0.85); }
-  to   { opacity: 1; transform: scale(1); }
-}
+.node:focus-visible .label { color: var(--accent); }
 
 /* ---------- overlay ---------- */
 /* overlay does not capture clicks: the map stays interactive underneath,
@@ -357,17 +372,14 @@ body::after {
 .bubble {
   position: absolute;
   left: 50%; top: 50%;                 /* JS overrides with the node position */
-  /* size to content, within bounds */
-  width: max-content;
-  max-width: min(520px, 86vw);
-  min-width: 260px;
+  /* square card, sized to content within bounds */
+  /* fixed width; height adapts to content (scrolls past the max) */
+  width: min(440px, 88vw);
   height: auto;
-  max-height: min(72vh, 540px);
-  min-height: 220px;
-  /* generous padding keeps the (rectangular) text inside the ellipse */
-  padding: clamp(46px, 6vw, 74px) clamp(54px, 7vw, 92px);
-  border-radius: 50%;
-  background: radial-gradient(ellipse at center, #191a20 0%, #131318 72%, #101015 100%);
+  max-height: min(86vh, 640px);
+  padding: clamp(30px, 4vw, 46px);
+  border-radius: 4px;
+  background: linear-gradient(160deg, #191a20 0%, #131318 60%, #101015 100%);
   border: 1px solid var(--line);
   box-shadow: 0 30px 90px rgba(0, 0, 0, 0.6);
   pointer-events: auto;               /* the bubble itself stays interactive */
@@ -403,11 +415,11 @@ body::after {
 .bubble-inner::-webkit-scrollbar-track { background: transparent; }
 
 .bubble .panel-close {
-  top: 8%; left: 50%;
-  right: auto;
-  transform: translateX(-50%);
+  top: 14px; right: 16px;
+  left: auto;
+  transform: none;
 }
-.bubble .panel-close:hover { transform: translateX(-50%) rotate(90deg); }
+.bubble .panel-close:hover { transform: rotate(90deg); }
 
 .bubble .panel-meta { margin-bottom: 10px; }
 .bubble .panel-title {
@@ -417,6 +429,7 @@ body::after {
 .bubble .panel-body {
   font-size: clamp(13.5px, 1.05vw, 15.5px);
   line-height: 1.46;
+  text-align: justify;
 }
 .bubble .panel-links {
   border-top: 0;
@@ -427,8 +440,22 @@ body::after {
   align-items: center;
   gap: 0;
 }
-.bubble .panel-links a { justify-content: center; }
-.bubble .panel-images { display: none; }  /* skip images inside the ellipse for now */
+.bubble .panel-images {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  margin-top: 18px;
+}
+.bubble .panel-images:empty { display: none; }
+.bubble .panel-images img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
 
 /* inside the bubble everything is white — no accent coloring */
 .bubble .panel-meta,
@@ -440,7 +467,5 @@ body::after {
 
 /* reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .node { animation: none; opacity: 1; }
-  .node.anchor-left { animation: none; }
   * { transition-duration: 0.01ms !important; }
 }
