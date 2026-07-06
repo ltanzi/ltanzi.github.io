@@ -246,6 +246,7 @@ PROJECTS.forEach((p, i) => {
 
   const btn = document.createElement("button");
   btn.className = "node " + (textLeft ? "text-left" : "text-right");
+  btn.dataset.key = p.key;
   btn.style.left = x + "%";
   btn.style.top = y + "%";
   btn.setAttribute("aria-label", p.label + " — " + p.years);

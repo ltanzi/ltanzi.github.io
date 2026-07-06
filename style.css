@@ -183,9 +183,10 @@ body::after {
   color: var(--muted);
   text-transform: lowercase;
   opacity: 0;
+  pointer-events: none;   /* not interactive until its thumbnail has loaded */
   transition: opacity 0.6s var(--ease), color 0.3s var(--ease), transform 0.3s var(--ease);
 }
-.node.ready { opacity: 1; }
+.node.ready { opacity: 1; pointer-events: auto; }
 
 .node .dot {
   position: absolute;
@@ -205,12 +206,14 @@ body::after {
   top: 0;
   transform: translateY(-50%);
 }
-.node.text-left  .node-content { right: 13px; text-align: right; }
-.node.text-right .node-content { left: 13px;  text-align: left; }
+.node.text-left  .node-content { right: 7px; text-align: right; }
+.node.text-right .node-content { left: 7px;  text-align: left; }
 
+/* the label is the hover target, with padding for a slightly bigger hit area */
 .node .label {
   display: block;
   white-space: nowrap;
+  padding: 6px;
   font-family: var(--font-display);
   font-weight: 600;
   font-size: clamp(14px, 1.05vw, 17px);
@@ -227,7 +230,14 @@ body::after {
   max-width: 104px;
   max-height: 104px;
   opacity: 0;
+  pointer-events: none;   /* hovering the thumbnail area is not the trigger */
   transition: opacity 0.3s var(--ease);
+}
+/* landscape thumbnails read smaller at the shared cap — give them more room */
+.node[data-key="teaching"] .node-thumb,
+.node[data-key="xarxa"] .node-thumb {
+  max-width: 150px;
+  max-height: 150px;
 }
 .node:hover .node-thumb,
 .node:focus-visible .node-thumb { opacity: 1; }
