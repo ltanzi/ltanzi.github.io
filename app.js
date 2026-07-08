@@ -16,7 +16,7 @@ const PROJECTS = [
     category: "Collective",
     s: 2,                 // set by Leo
     x: 0.14,
-    description: "Something that started as a joke and ended as a 10-year project. Curating a monthly event with two friends, bringing national and international artists from the hip-hop/rap world.",
+    description: "Something that started as a joke (and still today feels like it) and ended as a 10-year project. Curating a monthly event with two friends, bringing national and international artists from the hip-hop/rap world.",
     links: [
       { label: "@hotcollective", url: "https://www.instagram.com/hotcollective/" },
     ],
@@ -76,7 +76,7 @@ const PROJECTS = [
     category: "Academic",
     s: 9,                 // placeholder
     x: 0.42,
-    description: "Ph.D. at the Polytechnic University of Turin on deep learning for human-machine interaction in healthcare. 20 publications, 722 citations, h-index 9.",
+    description: "Ph.D. at the Polytechnic University of Turin on deep learning for human-machine interaction in healthcare. Worked mainly on computer-assisted prostatectomy with San Luigi Hospital of Turin and continued my work on femur-fracture classification with the CTO of Turin. Produced 20 publications, 722 citations, h-index 9.",
     links: [
       { label: "Google Scholar", url: "https://scholar.google.com/citations?user=s0p13UEAAAAJ" },
     ],
@@ -104,7 +104,7 @@ const PROJECTS = [
     category: "Chess",
     s: 2,                 // set by Leo
     x: 0.65,
-    description: "Itinerant amateur chess tournaments. Big prizes, big laughs. 10 events in 10 different places (from bars to print shops) over a period of 2 years.",
+    description: "Itinerant amateur chess tournaments. Big prizes, big laughs, nice music. 10 events in 10 different places (from bars to print shops) over a period of 2 years.",
     links: [
       { label: "@sssgambetto", url: "https://www.instagram.com/sssgambetto/" },
     ],
@@ -123,7 +123,7 @@ const PROJECTS = [
     category: "Writing",
     s: 5,                 // set by Leo
     x: 0.52,
-    description: "Wrote (before llm assistance :) ) about deep learning and computer vision — technical summaries of CV/DL research papers for MarkTechPost (200k views/month) and personal essays on Medium.",
+    description: "Wrote (before llm assistance :)) about deep learning and computer vision — technical summaries of CV/DL research papers for MarkTechPost (200k views/month) and personal essays on Medium.",
     links: [
       { label: "MarkTechPost", url: "https://www.marktechpost.com/author/leonardotanzi/" },
       { label: "Medium", url: "https://medium.com/@leonardo.tanzi" },
@@ -154,7 +154,7 @@ const PROJECTS = [
     category: "Mutual Aid",
     s: 9,                 // placeholder
     x: 0.88,
-    description: "A volunteer service-exchange platform — a community bulletin board where people and collectives offer or request services for free. Real-time chat, multilingual (CA/ES/EN), OAuth. Personal project, currently deployed but still not active.",
+    description: "Created a volunteer service-exchange platform — a community bulletin board where people and collectives offer or request services for free. Real-time chat, multilingual (CA/ES/EN). Personal project, currently deployed but still not active.",
     links: [
       { label: "xarxa.help", url: "https://www.xarxa.help" },
     ],
@@ -184,7 +184,7 @@ const PROJECTS = [
     category: "Radio",
     s: 6,                 // placeholder
     x: 0.80,
-    description: "Independent community radio in Barcelona, founded in 2024 to amplify local artists and cultural collectives. Weekly Sunday YouTube broadcasts from the cultural space F O C. We are two people co-running the radio, sharing the creative direction, organization, volunteer management, finance, struggle, and happiness. In recent months, we won the INJUVE grant and were able to invest funds in covering our resident artists' mobility, and we have already started collaborations with radios (pinata radio in montpellier, refugee worldwide in berlin, shella radio in prague) and festivals (rizomes, non frequenze festival, soundit). Sometimes I record a show as dj gaviscon, you can check it below. Cute bonus: we recently built a tool to help guests pick a pose for their pre-show portrait, try it below :)",
+    description: "Independent community radio in Barcelona, founded in 2024 to amplify local artists and cultural collectives. Weekly Sunday YouTube broadcasts from the cultural space F O C. We are two people co-running the radio, sharing the creative direction, organization, volunteer management, finance, struggle, and happiness. This year we officially became an association, won the INJUVE grant, and were able to invest funds in covering our resident artists' mobility. Sometimes I record a show as dj gaviscon — you can check it below. Cute bonus: we recently built a tool to help guests pick a pose for their pre-show portrait — try it below :)",
     links: [
       { label: "web", url: "https://www.canino.fm" },
       { label: "ig", url: "https://www.instagram.com/canino.fm"},
